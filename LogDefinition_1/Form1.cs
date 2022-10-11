@@ -326,14 +326,13 @@ namespace LogDefinition_1
             // Log정의서 json 파일에 추가
 
             // 로그 필드 추가 팝업
-            LogFieldEditor frm_LogfieldEditor = new LogFieldEditor();
+            LogFieldEditor frm_LogfieldEditor = new LogFieldEditor(dgv_LogDetail.SelectedCells[0].Value.ToString());
 
             // dgv에 추가된 필드를 dt 마지막 Row에 추가시켜 sender로 넘겨줌
             //dtLowerLogFieldList.Rows.Add(dgv_LogDetail.SelectedCells[0].Value.ToString());
             
             frm_LogfieldEditor.Show();
             frm_LogfieldEditor.LogFieldEditor_Load(dtLowerLogFieldList, e);
-            dataSendEvent(dgv_LogDetail.SelectedCells[0].Value.ToString());
 
             // LogCommon json에 추가
 
@@ -364,9 +363,5 @@ namespace LogDefinition_1
             dtLowerLogFieldList = dtLowerLogFieldList.DefaultView.ToTable(true);
         }
 
-        private void newLowerLogField(string argMsg)
-        {
-            dgv_LogDetail.SelectedCells[0].Value = argMsg;
-        }
     }
 }

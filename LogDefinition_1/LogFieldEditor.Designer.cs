@@ -53,6 +53,7 @@ namespace LogDefinition_1
             this.tb_LogFieldName.Font = new System.Drawing.Font("Infinity Sans WM Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tb_LogFieldName.Location = new System.Drawing.Point(154, 22);
             this.tb_LogFieldName.Name = "tb_LogFieldName";
+            this.tb_LogFieldName.ReadOnly = true;
             this.tb_LogFieldName.Size = new System.Drawing.Size(100, 23);
             this.tb_LogFieldName.TabIndex = 1;
             // 

@@ -10,13 +10,15 @@ using System.Windows.Forms;
 
 namespace LogDefinition_1
 {
-
-
     public partial class LogFieldEditor : Form
     {
-        public LogFieldEditor()
+        string newLogFieldName = string.Empty;
+
+        public LogFieldEditor(string logName)
         {
             InitializeComponent();
+
+            tb_LogFieldName.Text = logName;
         }
 
         public void LogFieldEditor_Load(object sender, EventArgs e)
