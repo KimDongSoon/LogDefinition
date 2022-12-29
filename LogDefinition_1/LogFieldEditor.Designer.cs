@@ -34,15 +34,16 @@ namespace LogDefinition_1
             this.btn_SaveToCommon = new System.Windows.Forms.Button();
             this.btn_SaveToLog = new System.Windows.Forms.Button();
             this.cb_FieldType = new System.Windows.Forms.ComboBox();
-            this.lb_LowerLogField1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_AddLogField = new System.Windows.Forms.Button();
+            this.dgv_FieldFactors = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_FieldFactors)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_LogFieldName
             // 
             this.lb_LogFieldName.AutoSize = true;
             this.lb_LogFieldName.Font = new System.Drawing.Font("Infinity Sans WM Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lb_LogFieldName.Location = new System.Drawing.Point(12, 24);
+            this.lb_LogFieldName.Location = new System.Drawing.Point(13, 25);
             this.lb_LogFieldName.Name = "lb_LogFieldName";
             this.lb_LogFieldName.Size = new System.Drawing.Size(54, 15);
             this.lb_LogFieldName.TabIndex = 0;
@@ -67,6 +68,7 @@ namespace LogDefinition_1
             this.btn_SaveToCommon.TabIndex = 2;
             this.btn_SaveToCommon.Text = "Common에 저장";
             this.btn_SaveToCommon.UseVisualStyleBackColor = false;
+            this.btn_SaveToCommon.Click += new System.EventHandler(this.btn_SaveToCommon_Click);
             // 
             // btn_SaveToLog
             // 
@@ -87,33 +89,34 @@ namespace LogDefinition_1
             this.cb_FieldType.Size = new System.Drawing.Size(121, 20);
             this.cb_FieldType.TabIndex = 4;
             // 
-            // lb_LowerLogField1
+            // btn_AddLogField
             // 
-            this.lb_LowerLogField1.AutoSize = true;
-            this.lb_LowerLogField1.Location = new System.Drawing.Point(14, 109);
-            this.lb_LowerLogField1.Name = "lb_LowerLogField1";
-            this.lb_LowerLogField1.Size = new System.Drawing.Size(63, 12);
-            this.lb_LowerLogField1.TabIndex = 5;
-            this.lb_LowerLogField1.Text = "하위필드 1";
+            this.btn_AddLogField.BackColor = System.Drawing.Color.White;
+            this.btn_AddLogField.Font = new System.Drawing.Font("Infinity Sans WM Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btn_AddLogField.Location = new System.Drawing.Point(154, 64);
+            this.btn_AddLogField.Name = "btn_AddLogField";
+            this.btn_AddLogField.Size = new System.Drawing.Size(100, 22);
+            this.btn_AddLogField.TabIndex = 6;
+            this.btn_AddLogField.Text = "추가";
+            this.btn_AddLogField.UseVisualStyleBackColor = false;
+            this.btn_AddLogField.Click += new System.EventHandler(this.btn_AddLogField_Click);
             // 
-            // button1
+            // dgv_FieldFactors
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.Font = new System.Drawing.Font("Infinity Sans WM Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.button1.Location = new System.Drawing.Point(154, 64);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 22);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "추가";
-            this.button1.UseVisualStyleBackColor = false;
+            this.dgv_FieldFactors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_FieldFactors.Location = new System.Drawing.Point(16, 105);
+            this.dgv_FieldFactors.Name = "dgv_FieldFactors";
+            this.dgv_FieldFactors.RowTemplate.Height = 23;
+            this.dgv_FieldFactors.Size = new System.Drawing.Size(240, 301);
+            this.dgv_FieldFactors.TabIndex = 7;
             // 
             // LogFieldEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(272, 450);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.lb_LowerLogField1);
+            this.Controls.Add(this.dgv_FieldFactors);
+            this.Controls.Add(this.btn_AddLogField);
             this.Controls.Add(this.cb_FieldType);
             this.Controls.Add(this.btn_SaveToLog);
             this.Controls.Add(this.btn_SaveToCommon);
@@ -122,6 +125,7 @@ namespace LogDefinition_1
             this.Name = "LogFieldEditor";
             this.Text = "LogFieldEditor";
             this.Load += new System.EventHandler(this.LogFieldEditor_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_FieldFactors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,7 +138,7 @@ namespace LogDefinition_1
         private System.Windows.Forms.Button btn_SaveToCommon;
         private System.Windows.Forms.Button btn_SaveToLog;
         private System.Windows.Forms.ComboBox cb_FieldType;
-        private System.Windows.Forms.Label lb_LowerLogField1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_AddLogField;
+        private System.Windows.Forms.DataGridView dgv_FieldFactors;
     }
 }

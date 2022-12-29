@@ -93,7 +93,10 @@ namespace LogDefinition_1
 
             dtLogType.Columns.Add("LogName");
             dtLogType.Columns.Add("LogType");
-            dtLogType.Columns.Add("Title");
+            dtLogType.Columns.Add("title");
+            dtLogType.Columns.Add("type");
+            dtLogType.Columns.Add("additionalProperties");
+
 
             JObject jobject = JObject.Parse(jsonData);
 
@@ -104,7 +107,7 @@ namespace LogDefinition_1
             {
                 JToken logToken = jProperty.Value.ToObject<JToken>();
 
-                dtLogType.Rows.Add(jProperty.Name, logToken["properties"]["Type"]["const"], logToken["title"]);
+                dtLogType.Rows.Add(jProperty.Name, logToken["properties"]["Type"]["const"], logToken["title"], logToken["type"], logToken["additionalProperties"]);
             }
         }
 
@@ -138,9 +141,23 @@ namespace LogDefinition_1
         private void dgv_TypeList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = dgv_TypeList.CurrentCell.RowIndex;
-            selectedLogName = dgv_TypeList.Rows[index].Cells[0].Value.ToString();
 
-            ViewLogDetails(selectedLogName);
+            // 존재하는 로그 타입 조회
+            if (dgv_TypeList.CurrentCell.Value.ToString() != "")
+            {
+                selectedLogName = dgv_TypeList.Rows[index].Cells[0].Value.ToString();
+
+                ViewLogDetails(selectedLogName);
+            }
+
+            // 새로운 로그 타입 추가
+            else
+            {
+                logDetails = new DataTable();
+                logDetails.Columns.Add("Required");
+
+                dgv_LogDetail.DataSource = logDetails;
+            }
 
         }
 
@@ -162,9 +179,10 @@ namespace LogDefinition_1
             }
 
             dgv_LogDetail.DataSource = logDetails;
-
+            
             // 기존 필드 복사 DataTable 생성
             originalLogDetails = logDetails.Copy();
+
         }
 
         private void btn_AddLogField_Click(object sender, EventArgs e)
@@ -178,6 +196,8 @@ namespace LogDefinition_1
         // LogCommon 
         private void cb_LogCommonList_Click(object sender, EventArgs e)
         {
+            cb_LogCommonList.Items.Clear();
+
             for (int i = 0; i < dtLogCommon.Rows.Count; ++i)
             {
                 cb_LogCommonList.Items.Add(dtLogCommon.Rows[i]["LogCommon"]);
@@ -211,8 +231,6 @@ namespace LogDefinition_1
                 // 선택된 필드를 DataGridView 및 logDetail 데이터테이블에 추가
                 else
                 {
-                    originalLogDetails = logDetails.Copy();
-
                     logDetails.Rows.Add(cb_LogCommonList.SelectedItem.ToString());
                 }
 
@@ -273,6 +291,8 @@ namespace LogDefinition_1
                     // Common에 존재하지 않는 경우
                     else
                     {
+                        // 자식 form에서 부모 form으로 정보 전달 (bool, JToken)
+
 
 
                     }
@@ -327,9 +347,6 @@ namespace LogDefinition_1
 
             // 로그 필드 추가 팝업
             LogFieldEditor frm_LogfieldEditor = new LogFieldEditor(dgv_LogDetail.SelectedCells[0].Value.ToString());
-
-            // dgv에 추가된 필드를 dt 마지막 Row에 추가시켜 sender로 넘겨줌
-            //dtLowerLogFieldList.Rows.Add(dgv_LogDetail.SelectedCells[0].Value.ToString());
             
             frm_LogfieldEditor.Show();
             frm_LogfieldEditor.LogFieldEditor_Load(dtLowerLogFieldList, e);
@@ -360,8 +377,79 @@ namespace LogDefinition_1
                 }
             }
 
+            // 중복제거
             dtLowerLogFieldList = dtLowerLogFieldList.DefaultView.ToTable(true);
         }
 
+        private void btn_SaveLogType_Click(object sender, EventArgs e)
+        {
+            // json 파일 열기
+            string jsonData = File.ReadAllText(jsonFilePath);
+            JObject jObject = JObject.Parse(jsonData);
+
+            //List<string> childTokens = new List<string>();
+            // 추가할 LogType을 추가
+
+            //JToken newLogType = (JToken)jObject["definitions"];
+
+            //foreach (var childToken in newLogType.Children<JProperty>())
+            //    childTokens.Add(childToken.Name);
+
+            //newLogType
+            MakeJToken();
+
+
+            // json 파일로 저장
+            try
+            {
+                File.WriteAllText(jsonFilePath, jObject.ToString());
+
+                MessageBox.Show("저장 성공", "저장 완료");
+            }
+            catch
+            {
+                MessageBox.Show("형식을 확인하세요", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+
+        private void MakeJToken()
+        {
+            string jsonData = File.ReadAllText(jsonFilePath);
+            JObject jObject = JObject.Parse(jsonData);
+
+            JToken partOfJObject = jObject["definitions"];
+
+            JToken newLogJToken; // = jObject["definitions"];
+            JObject ddd;
+
+            string newLogType = string.Empty;
+
+            // LogName 저장
+            newLogType += $"\"{dgv_TypeList.CurrentRow.Cells[0].Value}\"";
+
+            newLogType += " : {";
+
+            // type 저장
+            newLogType += $"\"type\" : \"{dgv_TypeList.CurrentRow.Cells[3].Value}\", ";
+
+            // title 저장
+            newLogType += $"\"title\" : \"{dgv_TypeList.CurrentRow.Cells[2].Value}\", ";
+
+            // additionalProperties 저장
+            newLogType += $"\"additionalProperties\" : \"{dgv_TypeList.CurrentRow.Cells[4].Value}\", ";
+
+            // properties 저장
+            newLogType += $"\"properties\" : \"-\"";
+
+            newLogType += "}";
+
+            newLogType = (string)JsonConvert.SerializeObject(newLogType);
+
+            newLogJToken = JToken.Parse(newLogType);
+
+            partOfJObject.AddAnnotation(newLogJToken);
+        }
     }
 }

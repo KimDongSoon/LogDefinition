@@ -37,6 +37,7 @@ namespace LogDefinition_1
             this.btn_AddLogField = new System.Windows.Forms.Button();
             this.dgv_LogCommon = new System.Windows.Forms.DataGridView();
             this.cb_LogCommonList = new System.Windows.Forms.ComboBox();
+            this.btn_SaveLogType = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TypeList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_LogDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_LogCommon)).BeginInit();
@@ -82,7 +83,7 @@ namespace LogDefinition_1
             this.dgv_TypeList.Name = "dgv_TypeList";
             this.dgv_TypeList.RowHeadersVisible = false;
             this.dgv_TypeList.RowTemplate.Height = 23;
-            this.dgv_TypeList.Size = new System.Drawing.Size(364, 394);
+            this.dgv_TypeList.Size = new System.Drawing.Size(631, 394);
             this.dgv_TypeList.TabIndex = 3;
             this.dgv_TypeList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_TypeList_CellClick);
             // 
@@ -114,11 +115,11 @@ namespace LogDefinition_1
             // 
             this.dgv_LogCommon.BackgroundColor = System.Drawing.Color.White;
             this.dgv_LogCommon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_LogCommon.Location = new System.Drawing.Point(545, 45);
+            this.dgv_LogCommon.Location = new System.Drawing.Point(812, 45);
             this.dgv_LogCommon.Name = "dgv_LogCommon";
             this.dgv_LogCommon.RowHeadersVisible = false;
             this.dgv_LogCommon.RowTemplate.Height = 23;
-            this.dgv_LogCommon.Size = new System.Drawing.Size(355, 394);
+            this.dgv_LogCommon.Size = new System.Drawing.Size(140, 394);
             this.dgv_LogCommon.TabIndex = 6;
             // 
             // cb_LogCommonList
@@ -132,11 +133,24 @@ namespace LogDefinition_1
             this.cb_LogCommonList.SelectedIndexChanged += new System.EventHandler(this.cb_LogCommonList_SelectedIndexChanged);
             this.cb_LogCommonList.Click += new System.EventHandler(this.cb_LogCommonList_Click);
             // 
+            // btn_SaveLogType
+            // 
+            this.btn_SaveLogType.BackColor = System.Drawing.Color.White;
+            this.btn_SaveLogType.Font = new System.Drawing.Font("Infinity Sans WM Regular", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btn_SaveLogType.Location = new System.Drawing.Point(697, 17);
+            this.btn_SaveLogType.Name = "btn_SaveLogType";
+            this.btn_SaveLogType.Size = new System.Drawing.Size(109, 23);
+            this.btn_SaveLogType.TabIndex = 8;
+            this.btn_SaveLogType.Text = "로그 타입 저장하기";
+            this.btn_SaveLogType.UseVisualStyleBackColor = false;
+            this.btn_SaveLogType.Click += new System.EventHandler(this.btn_SaveLogType_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1168, 450);
+            this.Controls.Add(this.btn_SaveLogType);
             this.Controls.Add(this.cb_LogCommonList);
             this.Controls.Add(this.dgv_LogCommon);
             this.Controls.Add(this.btn_AddLogField);
@@ -164,6 +178,7 @@ namespace LogDefinition_1
         private System.Windows.Forms.Button btn_AddLogField;
         public System.Windows.Forms.DataGridView dgv_LogCommon;
         private System.Windows.Forms.ComboBox cb_LogCommonList;
+        private System.Windows.Forms.Button btn_SaveLogType;
     }
 }
 
